@@ -12,8 +12,6 @@ M. Pastorino, M. Alibani, N. Acito, and G. Moser, "Synthesis of abundance maps t
 
 When using this work, please cite our CVPRw25 paper:
 
-M. Pastorino, M. Alibani, N. Acito, and G. Moser, "Deep Diffusion Models and Unsupervised Hyperspectral Unmixing for Realistic Abundance Map Synthesis," in Proceedings of the Computer Vision and Pattern Recognition Conference, 3038-3046, 2025. 
-
 ```
 @ARTICLE{cvprw25_dm_abu,
   author={Pastorino, Martina and Alibani, Michael and Acito, Nicola and Moser, Gabriele},
@@ -47,18 +45,6 @@ cd HSI_DDPM
 pip install -r requirements.txt
 ```
 
-### Step :three:: Run the code
-
-1. Train the model on a scarce GT set 
-
-```
-python main.py -r -g conncomp
-```
-2. Infer on data
-
-```
-python main.py -g full
-```
 
 ## :rainbow: Blind Hyperspectral Unmixing
 
@@ -78,23 +64,18 @@ The name of the unmixing methods selected must be inserted in the file `config\P
 
 ## :cyclone: Classifier-free Guided Diffusion Model
 
-### :running: DM Training
+### :running: Abundance_DM Training
 
 Input: abundances obtained by the blind hyperspectral unmixing dictionary of your choice
 
 `python Diffusion.py -p train -c config/PRISMA_256_DDPM.json`
 
-### :
+### :test_tube: Abundance_DM Sampling
 
 
+Output: synthetic abundance maps, to be saved in `.\experiments\ddpm\...`
 
-
-
-For synthesizing abundance maps, please modify the 'resume_state' in the json file, and run:
-
-python Diffusion.py -p val -c config/Chikusei_256_DDPM.json
-
-After that, we can obtain the synthesized abundance in ./experiments/ddpm/\*/mat_results/.
+`python Diffusion.py -p val -c config/PRISMA_256_DDPM.json`
 
 Here you can substitute the 
 
