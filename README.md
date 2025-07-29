@@ -82,7 +82,7 @@ Here you can select the unmixing method (among the dictionary you built before) 
 
 Once the synthetic abundance maps are store in `.\experiments\ddpm\...`, it is possible to reconstruct synthetic hyperspectral images starting from these generated abundance maps and endmembers pre-computed by the blind hyperspectral unmixing method.
 
-`hsi_generated = np.matmul(em, abu.reshape(#num of endmembers,-1))`
+`hsi_generated = np.matmul(em, abu_generated.reshape(#num of endmembers,-1))`
 
 ## :new_moon_with_face: License
 
