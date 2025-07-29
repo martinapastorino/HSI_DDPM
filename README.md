@@ -2,9 +2,9 @@
 Hyperspectral Image Synthesis through Deep Diffusion Models
 
 
-This repository contains the code related to the CVPRW25 and IGARSS25 papers:  
+This repository contains the code related to the CVPRw25 (MORSE) and IGARSS25 papers:  
 
-M. Pastorino, M. Alibani, N. Acito, and G. Moser, "Deep Diffusion Models and Unsupervised Hyperspectral Unmixing for Realistic Abundance Map Synthesis," in Proceedings of the Computer Vision and Pattern Recognition Conference Workshops, 3038-3046, 2025: [https://openaccess.thecvf.com/content/CVPR2025W/MORSE/papers/Pastorino_Deep_Diffusion_Models_and_Unsupervised_Hyperspectral_Unmixing_for_Realistic_Abundance_CVPRW_2025_paper.pdf](https://openaccess.thecvf.com/content/CVPR2025W/MORSE/papers/Pastorino_Deep_Diffusion_Models_and_Unsupervised_Hyperspectral_Unmixing_for_Realistic_Abundance_CVPRW_2025_paper.pdf)
+M. Pastorino, M. Alibani, N. Acito, and G. Moser, "Deep Diffusion Models and Unsupervised Hyperspectral Unmixing for Realistic Abundance Map Synthesis," in Proceedings of the Computer Vision and Pattern Recognition Conference Workshops, 3038-3046, 2025: [CVPR2025W_MORSE](https://openaccess.thecvf.com/content/CVPR2025W/MORSE/papers/Pastorino_Deep_Diffusion_Models_and_Unsupervised_Hyperspectral_Unmixing_for_Realistic_Abundance_CVPRW_2025_paper.pdf)
 
 
 M. Pastorino, M. Alibani, N. Acito, and G. Moser, "Synthesis of abundance maps through blind hyperspectral unmixing and deep diffusion models," in Proceedings of IEEE Geoscience and Remote Sensing Symposium (IGARSS), 2025.
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
 ## :rainbow: Blind Hyperspectral Unmixing
 
-This model works with a dictionary of unmixing methods (any method can be chosen). You can apply any method of your preference to extract endmembers and abundances. For this project, some methods presented in "B. Rasti, A. Zouaoui, J. Mairal, J. Chanussot, Image Processing and Machine Learning for Hyperspectral Unmixing: An Overview and the HySUPP Python Package, _IEEE TGRS_" [https://ieeexplore.ieee.org/document/10508406](https://ieeexplore.ieee.org/document/10508406) and implemented in [https://github.com/BehnoodRasti/HySUPP/tree/main](https://github.com/BehnoodRasti/HySUPP/tree/main) where employed. The model is trained on the PRISMA dataset, but it can be applied to any hyperspectral dataset. 
+This model works with a dictionary of unmixing methods (any method can be chosen to extract both endmembers and abundances). For this project, the methods used are presented in "B. Rasti, A. Zouaoui, J. Mairal, J. Chanussot, Image Processing and Machine Learning for Hyperspectral Unmixing: An Overview and the HySUPP Python Package, [IEEE TGRS](https://ieeexplore.ieee.org/document/10508406)" and implemented in [HySUPP](https://github.com/BehnoodRasti/HySUPP/tree/main). The model is trained on the PRISMA dataset, but it can be applied to any hyperspectral dataset. 
 
 Once the unmixing is performed, the data should have the following structure:
 
@@ -72,12 +72,17 @@ Input: abundances obtained by the blind hyperspectral unmixing dictionary of you
 
 ### :test_tube: Abundance_DM Sampling
 
-
 Output: synthetic abundance maps, to be saved in `.\experiments\ddpm\...`
 
 `python Diffusion.py -p val -c config/PRISMA_256_DDPM.json`
 
-Here you can substitute the 
+Here you can select the unmixing method (among the dictionary you built before) for which you want to generate synthetic abundance maps `m_sample = get_random_m() # or substitute with a number between 0, ..., N-1 with N # of unmixing methods`.
+
+## :hammer_and_wrench: Hyperspectral Image Reconstruction
+
+Once the synthetic abundance maps are store in `.\experiments\ddpm\...`, it is possible to reconstruct synthetic hyperspectral images starting from these generated abundance maps and endmembers pre-computed by the blind hyperspectral unmixing method.
+
+`hsi_generated = np.matmul(em, abu.reshape(#num of endmembers,-1))`
 
 ## :new_moon_with_face: License
 
@@ -85,4 +90,5 @@ The code is released under the GPL-3.0-only license. See `LICENSE.md` for more d
 
 ## :eyes: Acknowledgements
 
-...
+
+The code to perform blind hyperspectral unmixing derives from the GitHub repository [HySUPP](https://github.com/BehnoodRasti/HySUPP/tree/main).
