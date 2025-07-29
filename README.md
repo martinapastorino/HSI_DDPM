@@ -1,6 +1,7 @@
 # HSI_DDPM
-Hyperspectral Image Synthesis through Deep Diffusion Models
+Hyperspectral Image Synthesis through Blind Hyperspectral Unmixing and Deep Diffusion Models
 
+![screenshot](arch.PNG)
 
 This repository contains the code related to the CVPRw25 (MORSE) and IGARSS25 papers:  
 
@@ -64,13 +65,13 @@ The name of the unmixing methods selected must be inserted in the file `config\P
 
 ## :cyclone: Classifier-free Guided Diffusion Model
 
-### :running: Abundance_DM Training
+### :running: DM Training (with abundance maps)
 
 Input: abundances obtained by the blind hyperspectral unmixing dictionary of your choice
 
 `python Diffusion.py -p train -c config/PRISMA_256_DDPM.json`
 
-### :test_tube: Abundance_DM Sampling
+### :test_tube: DM Sampling (generating abundance maps)
 
 Output: synthetic abundance maps, to be saved in `.\experiments\ddpm\...`
 
@@ -90,5 +91,5 @@ The code is released under the GPL-3.0-only license. See `LICENSE.md` for more d
 
 ## :eyes: Acknowledgements
 
-
-The code to perform blind hyperspectral unmixing derives from the GitHub repository [HySUPP](https://github.com/BehnoodRasti/HySUPP/tree/main).
+The code to perform blind hyperspectral unmixing derives from the GitHub repository [HySUPP](https://github.com/BehnoodRasti/HySUPP/tree/main). 
+This code is an unmixing-agnostic, CFG DDPM version of the UnmixingDM from the GitHub repository [UnmixingDM](https://github.com/yuyang95/UnmixingDM).
